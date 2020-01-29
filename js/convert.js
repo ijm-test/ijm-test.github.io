@@ -52,8 +52,6 @@ function createFile(data, filename, type) {
 		filename += "." + arr[i];
 	}
 
-	uploadFile(file);
-
 	//Create list item with link
 	var li = document.createElement("li"),
 		a = document.createElement("a"),
@@ -102,7 +100,7 @@ function createFile(data, filename, type) {
 	list.appendChild(li);
 
 	updateScroll(list);
-	displayPLT(ID, url);
+	displayPLT(ID, file);
 }
 
 function parsePlt(data){
