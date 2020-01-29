@@ -45,7 +45,7 @@ function fileCallback(file){
 	}
 }
 
-function displayPLT(id, file) {
+function displayPLT(id, file, filename) {
 	if (typeof displayPLT.last == "undefined") {
 		displayPLT.last = '';
 	}
@@ -82,7 +82,7 @@ function displayPLT(id, file) {
 		};
 		xhr.open('GET', file);
 		xhr.send();*/
-		uploadFile(file, id);
+		uploadFile(file, filename);
 		//reloadIFrame(pltFrame, host + cadframe + file);
 	} else {
 		displayPLT.last = '';
