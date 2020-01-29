@@ -100,7 +100,7 @@ function createFile(data, filename, type) {
 	list.appendChild(li);
 
 	updateScroll(list);
-	displayPLT(ID, file);
+	displayPLT(ID, file, filename);
 }
 
 function parsePlt(data){
