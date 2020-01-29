@@ -121,8 +121,9 @@ function uploadFile(file, filename) {
      		console.log('success');
 		
 		var pltFrame = document.getElementById("PLTview");
-		var fileURL = "http://" + storageRef.bucket + fileDir + filename;
-		reloadIFrame(pltFrame, host + cadframe + fileURL);
+		storageRef.child(fileDir + filename).getDownloadURL().then(function(url) {
+			reloadIFrame(pltFrame, host + cadframe + url);
+		});
   	});
 }
 
