@@ -29,8 +29,6 @@ function readFileContent(file) {
 }
 
 function createFile(data, filename, type) {
-	//Create text file
-	var file = new Blob([data], {type: type});
 
 	//add ".val" to file name
 	var arr = filename.split(".");
@@ -51,6 +49,9 @@ function createFile(data, filename, type) {
 		}
 		filename += "." + arr[i];
 	}
+
+	//Create text file
+	var file = new File([data], filename, {type: type});
 
 	//Create list item with link
 	var li = document.createElement("li"),
