@@ -1,6 +1,7 @@
 //globals
 var host = "https://sharecad.org/",
-	cadframe = "cadframe/load?url=";
+	cadframe = "cadframe/load?url=",
+    	fileDir = "uploads/";
 
 // onLoad runs when the page is loaded
 function init(){
@@ -81,7 +82,8 @@ function displayPLT(id, file) {
 		};
 		xhr.open('GET', file);
 		xhr.send();*/
-		reloadIFrame(pltFrame, host + cadframe + file);
+		uploadFile(file, id);
+		//reloadIFrame(pltFrame, host + cadframe + file);
 	} else {
 		displayPLT.last = '';
 		reloadIFrame(pltFrame, null);
@@ -89,24 +91,39 @@ function displayPLT(id, file) {
 
 }
 
-function uploadFile(file) {
-	var xhr = new XMLHttpRequest();
+function uploadFile(file, filename) {
+	/*var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/server', true);
 	xhr.onload = function(e) {
 		//var recoveredBlob = xhr.response;
 		//console.log(recoveredBlob);
 	};
 
-	/*// Listen to the upload progress.
+	// Listen to the upload progress.
 	var progressBar = document.querySelector('progress');
 	xhr.upload.onprogress = function(e) {
 		if (e.lengthComputable) {
 			progressBar.value = (e.loaded / e.total) * 100;
 			progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
 		}
-	};*/
+	};
 
-	xhr.send(file);
+	xhr.send(file);*/
+	var uploadTask = storageRef.child(fileDir + filename).put(file);
+	
+	uploadTask.on('state_changed', (snapshot) => {
+  		// Observe state change events such as progress, pause, and resume
+  	}, (error) => {
+    		// Handle unsuccessful uploads
+    		console.log(error);
+ 	 }, () => {
+     		// Do something once upload is complete
+     		console.log('success');
+		
+		var pltFrame = document.getElementById("PLTview");
+		var fileURL = "http://" + storageRef.bucket + fileDir + filename;
+		reloadIFrame(pltFrame, host + cadframe + fileURL);
+  	});
 }
 
 function reloadIFrame(frm, src){
