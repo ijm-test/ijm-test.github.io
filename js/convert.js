@@ -14,7 +14,7 @@ function convert(file){
 		data = parsePlt(data);
 
 		//creat downloadable file
-		createFile(data,file.name, "text/plain");
+		createFile(data,file.name, "application/vnd.hp-hpgl");
 	}).catch(error => console.log(error));
 }
 
