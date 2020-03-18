@@ -364,3 +364,8 @@ p.footNote {
 		display: none;
 	}
 }
+#pyodideTest {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
